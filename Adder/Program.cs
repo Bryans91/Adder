@@ -23,18 +23,36 @@ namespace Adder
             Node andTwo = new And();
             andTwo.Name = "And 2";
 
+            Circuit circuit = new Circuit();
 
-            Edge edge = new Edge(and, andTwo);
-            and.OutputList.Add(edge);
+            Node input1 = new In() { Output = true };
+            Node input2 = new In() { Output = true };
 
-            and.InputList.Add(true);
-            and.InputList.Add(true);
-            and.NrOfInputs = 2;
+            Edge edge = new Edge(input1, and);
+            Edge edge2 = new Edge(input2, and);
+            input1.OutputList.Add(edge);
+            input2.OutputList.Add(edge2);
 
-            and.Run(displayer);
 
-            andTwo.NrOfInputs = 2;
-            andTwo.Run(displayer);
+            circuit.InputNodes.Add(input1);
+            circuit.InputNodes.Add(input2);
+            circuit.AdderNodes.Add(and);
+
+
+            //create infinite
+            //Edge edge3 = new Edge(and, input1);
+            //and.OutputList.Add(edge3);
+
+            try
+            {
+                circuit.Run(validator);
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+            }
+
+
+            Console.WriteLine("ended");
+
 
 
             Console.Read();

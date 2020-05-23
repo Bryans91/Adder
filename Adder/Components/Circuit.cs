@@ -23,8 +23,11 @@ namespace Adder.Components
         public override void Run(IVisitor visitor)
         {
             base.Run(visitor);
-        }
+            InputNodes.ForEach((Node node) => {
+                node.Run(visitor);
+            });
 
+        }
 
         public override void Accept(IVisitor visitor)
         {

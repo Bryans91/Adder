@@ -7,7 +7,7 @@ using Adder.Visitors;
 
 namespace Adder.Components
 {
-    public class Node : Component //Leaf
+    public abstract class Node : Component //Leaf
     {
       
         public List<bool> InputList { get; set; }
