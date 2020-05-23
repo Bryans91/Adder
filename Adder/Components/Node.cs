@@ -33,6 +33,14 @@ namespace Adder.Components
         {
             base.Run(visitor);
             Handle();
+
+            if (NrOfInputs == InputList.Count)
+            {
+                OutputList.ForEach((Edge edge) =>
+                {
+                    edge.Out.Run(visitor);
+                });
+            }
         }
 
         public virtual void Handle()

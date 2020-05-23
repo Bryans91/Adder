@@ -17,35 +17,62 @@ namespace Adder
             IVisitor validator = new Validator();
             IVisitor displayer = new Displayer();
 
-            Node and = new And();
-            and.Name = "And 1";
+            /** Basic circuit **/
 
-            Node andTwo = new And();
-            andTwo.Name = "And 2";
+            //Inputs
+            Node input1 = new In() { Output = true, Name = "In 1" };
+            Node input2 = new In() { Output = false, Name = "In 2" };
+
+
+            //Adder
+            Node not1 = new Not() { Name = "Not 1" };
+            Node or1 = new Or() { Name = "Or 1" };
+
+            Node and1 = new And() { Name = "And 1" };
+            Node nor1 = new Nor() { Name = "Nor 1" };
+
+
+            //Outputs
+            Node output1 = new Out() { Name = "Out 1" };
+            Node output2 = new Out() { Name = "Out 2" };
+
+            //Edges
+
+            input1.OutputList.Add(new Edge(input1, not1));
+            not1.NrOfInputs = 1;
+
+            input1.OutputList.Add(new Edge(input1, or1));
+            input2.OutputList.Add(new Edge(input2, or1));
+            or1.NrOfInputs = 2;
+
+            not1.OutputList.Add(new Edge(not1, and1));
+            or1.OutputList.Add(new Edge(or1, and1));
+            and1.NrOfInputs = 2;
+
+            not1.OutputList.Add(new Edge(not1, nor1));
+            or1.OutputList.Add(new Edge(or1, nor1));
+            nor1.NrOfInputs = 2;
+
+            nor1.OutputList.Add(new Edge(nor1, output1));
+            and1.OutputList.Add(new Edge(and1, output2));
+
+            output2.NrOfInputs = 1;
+            output1.NrOfInputs = 1;
+
 
             Circuit circuit = new Circuit();
-
-            Node input1 = new In() { Output = true };
-            Node input2 = new In() { Output = true };
-
-            Edge edge = new Edge(input1, and);
-            Edge edge2 = new Edge(input2, and);
-            input1.OutputList.Add(edge);
-            input2.OutputList.Add(edge2);
-
-
             circuit.InputNodes.Add(input1);
             circuit.InputNodes.Add(input2);
-            circuit.AdderNodes.Add(and);
 
 
-            //create infinite
-            //Edge edge3 = new Edge(and, input1);
-            //and.OutputList.Add(edge3);
+
+            circuit.OutputNodes.Add(output1);
+            circuit.OutputNodes.Add(output2);
+            
 
             try
             {
-                circuit.Run(validator);
+                circuit.Run(displayer);
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
             }
