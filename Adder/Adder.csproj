@@ -55,6 +55,10 @@
     <Compile Include="Components\Nodes\Out.cs" />
     <Compile Include="Components\Nodes\Nand.cs" />
     <Compile Include="Creators\Builder.cs" />
+    <Compile Include="Factories\NodeFactory.cs" />
+    <Compile Include="IO\ConsoleIO.cs" />
+    <Compile Include="IO\FileParser.cs" />
+    <Compile Include="IO\FileReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
