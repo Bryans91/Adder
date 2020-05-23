@@ -18,6 +18,9 @@ namespace Adder.Components
         public bool Output { get; set; }
 
 
+        public int NrOfInputs { get; set; }
+
+
         public Node() : base()
         {
             OutputList = new List<Edge>();
