@@ -29,10 +29,11 @@ namespace Adder
 
             and.InputList.Add(true);
             and.InputList.Add(true);
-
+            and.NrOfInputs = 2;
 
             and.Run(displayer);
 
+            andTwo.NrOfInputs = 2;
             andTwo.Run(displayer);
 
 

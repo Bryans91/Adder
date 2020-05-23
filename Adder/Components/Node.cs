@@ -39,10 +39,14 @@ namespace Adder.Components
         {
 
             //stuur output naar edges
-            OutputList.ForEach((Edge edge) =>
+   
+            if (NrOfInputs == InputList.Count)
             {
-                edge.Out.InputList.Add(Output);
-            });
+                OutputList.ForEach((Edge edge) =>
+                {
+                    edge.Out.InputList.Add(Output);
+                });
+            }
         }
    
 

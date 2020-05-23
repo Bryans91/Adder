@@ -8,5 +8,20 @@ namespace Adder.Components.Nodes
 {
     public class Not : Node
     {
+        public override void Handle()
+        {
+            Output = true;
+
+            InputList.ForEach((bool input) =>
+            {
+                if (input)
+                {
+                    Output = false;
+                }
+            });
+
+
+            base.Handle();
+        }
     }
 }
