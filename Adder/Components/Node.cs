@@ -64,5 +64,7 @@ namespace Adder.Components
             visitor.Visit(this);
         }
 
+        public abstract Node Clone();
+
     }
 }
