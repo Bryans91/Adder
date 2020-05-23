@@ -8,5 +8,9 @@ namespace Adder.Components.Nodes
 {
     public class Out : Node
     {
+        public override Node Clone()
+        {
+            return this.MemberwiseClone() as Node;
+        }
     }
 }

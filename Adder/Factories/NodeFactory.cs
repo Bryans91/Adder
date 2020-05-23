@@ -38,8 +38,7 @@ namespace Adder.Factories
         {
             Node prototype = _prototypes[type];
 
-            //return prototype.Clone();
-            return null;
+            return prototype.Clone();
         }
     }
 }

@@ -23,5 +23,10 @@ namespace Adder.Components.Nodes
 
             base.Handle();
         }
+
+        public override Node Clone()
+        {
+            return this.MemberwiseClone() as Node;
+        }
     }
 }
