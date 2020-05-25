@@ -59,7 +59,7 @@ namespace Adder
             //nor1.OutputList.Add(new Edge(nor1, not1));
 
 
-            Circuit circuit = new Circuit();
+            Circuit circuit = new Circuit() { Name = "Circuit 1" };
             //add nodes to circuit
    
             circuit.Components.Add(not1);
