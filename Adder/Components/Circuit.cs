@@ -10,8 +10,6 @@ namespace Adder.Components
     public class Circuit : Component //Composite
     {
 
-
-
         public List<Component> Components { get; set; }
 
         public Circuit() : base()
@@ -27,7 +25,6 @@ namespace Adder.Components
                 component.Run(visitor);
             });
         }
-
 
         public override void Accept(IVisitor visitor)
         {

@@ -17,8 +17,7 @@ namespace Adder.Visitors
 
         public void Visit(Circuit visited)
         {
-            Console.WriteLine("this is a circuit");
-            //throw new NotImplementedException();
+            Console.WriteLine("Circuit: "+ visited.Name);
         }
 
         public void Visit(Node visited)
@@ -69,10 +68,21 @@ namespace Adder.Visitors
 
         private void PrintStandardNode(Node node)
         {
-            Console.WriteLine("Node " + node.Name + " Outputs " + node.Output + " To:");
-            node.OutputList.ForEach((Edge e) => {
-                Console.WriteLine(e.Out.Name + "\n");
-            });
+            if (node.IsResolveable())
+            {
+                if (node.OutputList.Count > 0)
+                {
+                    Console.WriteLine("Node " + node.Name + " Outputs " + node.Output + " To:");
+                    node.OutputList.ForEach((Edge e) =>
+                    {
+                        Console.WriteLine(e.Out.Name);
+                    });
+                }
+                else
+                {
+                    Console.WriteLine("Node " + node.Name + " Outputs " + node.Output);
+                }
+            }
         }
     }
 }

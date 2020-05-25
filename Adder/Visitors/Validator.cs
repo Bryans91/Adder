@@ -17,14 +17,11 @@ namespace Adder.Visitors
 
         public void Visit(Circuit visited)
         {
-            //int max = visited.InputNodes.Count + visited.OutputNodes.Count + visited.AdderNodes.Count;
-            //visited.InputNodes.ForEach((Node node) =>
-            //{
-            //    if(IsInfinite(node,0,max))
-            //    {
-            //        throw new Exception("The circuit contains an infinite loop.");
-            //    }
-            //});
+            if (visited.Components.Count == 0)
+            {
+                throw new Exception("The circuit has no nodes.");
+            }
+
         }
 
         public void Visit(Node visited)
@@ -66,14 +63,11 @@ namespace Adder.Visitors
 
         private void HasCorrectNumberOfInputNodes(Node node)
         {
-            if (node.InputList.Count > 0)
+
+
+            if (IsInfinite(node))
             {
-                if (node.NrOfInputs != node.InputList.Count)
-                {
-                    throw new Exception(node.Name + " Does not have enough input Nodes. Has:" + node.InputList.Count + " Requires:" + node.NrOfInputs);
-                }
-            } else {
-                throw new Exception(node.Name + " Does not have any inputs.");
+                throw new Exception("The circuit contains an infinite loop.");
             }
         }
 
@@ -83,16 +77,11 @@ namespace Adder.Visitors
         }
 
 
-        private bool IsInfinite(Component node, int depth , int max)
+        private bool IsInfinite(Component component)
         {
-            foreach(Edge edge in node.OutputList)
+            if(component.NrOfInputs < component.InputList.Count)
             {
-                if(depth > max)
-                {
-                    return true;
-                }
-
-                return IsInfinite(edge.Out, depth+1, max);
+                return true;
             }
             return false;
         }

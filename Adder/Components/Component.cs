@@ -12,12 +12,19 @@ namespace Adder.Components
     {
         public List<bool> InputList { get; set; }
         public List<Edge> OutputList { get; set; }
+        public int NrOfInputs { get; set; }
 
         public string Name { get; set; }
         public bool Output { get; set; }
 
         public TimeSpan TimeSpan { get; set; }
         //protected IVisitor _visitor;
+
+        public Component()
+        {
+            OutputList = new List<Edge>();
+            InputList = new List<bool>();
+        }
 
         public virtual void Run(IVisitor visitor)
         {
@@ -33,8 +40,11 @@ namespace Adder.Components
             //this.PrintTime();
         }
 
+        public virtual bool IsResolveable()
+        {
+            return InputList.Count >= NrOfInputs;
+        }
 
-     
 
         public virtual void Accept(IVisitor visitor)
         {

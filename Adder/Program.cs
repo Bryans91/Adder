@@ -18,9 +18,6 @@ namespace Adder
             IVisitor displayer = new Displayer();
 
             /** Basic circuit **/
-
-
-
             //Adder
             Node not1 = new Not() { Name = "Not 1" };
             Node or1 = new Or() { Name = "Or 1" };
@@ -30,11 +27,12 @@ namespace Adder
 
 
 
+     
+            bool input1 = false;
+            bool input2 = true;
+
+
             //Edges
-
-            bool input1 = true;
-            bool input2 = false;
-
             not1.InputList.Add(input1); //input 1
             not1.NrOfInputs = 1;
 
@@ -47,11 +45,18 @@ namespace Adder
             or1.OutputList.Add(new Edge(or1, and1));
             and1.NrOfInputs = 2;
 
+            //endpoint AND
+
             not1.OutputList.Add(new Edge(not1, nor1));
             or1.OutputList.Add(new Edge(or1, nor1));
             nor1.NrOfInputs = 2;
 
+            //endpoint NOR
+           
 
+
+            //create infinite loop
+            //nor1.OutputList.Add(new Edge(nor1, not1));
 
 
             Circuit circuit = new Circuit();
@@ -59,12 +64,10 @@ namespace Adder
    
             circuit.Components.Add(not1);
             circuit.Components.Add(or1);
-            circuit.Components.Add(and1);
-            circuit.Components.Add(nor1);
+    
 
-            try
-            {
-                circuit.Run(displayer);
+            try {
+                circuit.Run(validator);
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
             }

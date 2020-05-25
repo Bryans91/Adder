@@ -11,13 +11,13 @@ namespace Adder.Components.Nodes
     {
         public override void Handle()
         {
-            Output = true;
+            this.Output = true;
 
             InputList.ForEach((bool input) =>
             {
                 if (input)
                 {
-                    Output = false;
+                    this.Output = false;
                 }
             });
 

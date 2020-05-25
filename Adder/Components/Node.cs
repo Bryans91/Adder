@@ -9,37 +9,34 @@ namespace Adder.Components
 {
     public abstract class Node : Component //Leaf
     {
-        public int NrOfInputs { get; set; }
-
-
-        public Node() : base()
-        {
-            OutputList = new List<Edge>();
-            InputList = new List<bool>();
-            Output = false;
-        }
-
 
         public override void Run(IVisitor visitor)
         {
+            Handle(); //Do node action
+
             base.Run(visitor);
-            Handle();
-        }
 
-        public virtual void Handle()
-        {
-
-            //stuur output naar edges
-   
-            if (NrOfInputs == InputList.Count)
+            //pass Data on
+            if (IsResolveable())
             {
                 OutputList.ForEach((Edge edge) =>
                 {
                     edge.Out.InputList.Add(Output);
+                    if(edge.Out.IsResolveable())
+                    {
+                        edge.Out.Run(visitor);
+                    }
                 });
             }
+            
+
         }
-   
+
+        public virtual void Handle()
+        {
+            //Do something here? 
+        }
+
 
 
         public override void Accept(IVisitor visitor)
