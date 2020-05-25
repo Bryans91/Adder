@@ -9,7 +9,6 @@ namespace Adder.Components
 {
     public abstract class Node : Component //Leaf
     {
-
         public override void Run(IVisitor visitor)
         {
             Handle(); //Do node action

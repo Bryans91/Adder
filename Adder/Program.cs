@@ -33,12 +33,12 @@ namespace Adder
 
 
             //Edges
-            not1.InputList.Add(input1); //input 1
+            not1.DefaultInputs.Add(input1); //input 1
             not1.NrOfInputs = 1;
 
 
-            or1.InputList.Add(input1);
-            or1.InputList.Add(input2);
+            or1.DefaultInputs.Add(input1);
+            or1.DefaultInputs.Add(input2);
             or1.NrOfInputs = 2;
 
             not1.OutputList.Add(new Edge(not1, and1));
@@ -64,10 +64,13 @@ namespace Adder
    
             circuit.Components.Add(not1);
             circuit.Components.Add(or1);
-    
+            circuit.Components.Add(and1);
+            circuit.Components.Add(nor1);
 
             try {
-                circuit.Run(validator);
+                circuit.Run(displayer);
+                circuit.Run(new Cleaner());
+                circuit.Run(displayer);
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
             }

@@ -68,8 +68,10 @@ namespace Adder.Visitors
 
         private void PrintStandardNode(Node node)
         {
-            if (node.IsResolveable())
+            if (node.IsResolveable() && !node.Printed)
             {
+                node.Printed = true;
+
                 if (node.OutputList.Count > 0)
                 {
                     Console.WriteLine("Node " + node.Name + " Outputs " + node.Output + " To:");

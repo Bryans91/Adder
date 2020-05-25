@@ -63,6 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Visitors\IVisitor.cs" />
     <Compile Include="Visitors\Displayer.cs" />
+    <Compile Include="Visitors\Cleaner.cs" />
     <Compile Include="Visitors\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
