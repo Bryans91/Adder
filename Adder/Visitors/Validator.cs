@@ -26,48 +26,52 @@ namespace Adder.Visitors
 
         public void Visit(Node visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            throw new Exception("An abstract node has been created.");
         }
 
-      
+
         public void Visit(And visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            HasCorrectNumberOfInputNodes(visited, 2);
+            IsInfinite(visited);
         }
 
         public void Visit(Nand visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            HasCorrectNumberOfInputNodes(visited, 2);
+            IsInfinite(visited);
         }
 
         public void Visit(Nor visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            HasCorrectNumberOfInputNodes(visited, 2);
+            IsInfinite(visited);
         }
 
         public void Visit(Not visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            HasCorrectNumberOfInputNodes(visited, 1);
+            IsInfinite(visited);
         }
 
         public void Visit(Or visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            HasCorrectNumberOfInputNodes(visited, 2);
+            IsInfinite(visited);
         }
 
         public void Visit(Xor visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            HasCorrectNumberOfInputNodes(visited, 2);
+            IsInfinite(visited);
         }
 
 
-        private void HasCorrectNumberOfInputNodes(Node node)
+        private void HasCorrectNumberOfInputNodes(Node node, int min)
         {
-
-
-            if (IsInfinite(node))
+            if (node.NrOfInputs < min)
             {
-                throw new Exception("The circuit contains an infinite loop.");
+                throw new Exception(node.Name + "Does not have enough inputs. Has:" + node.NrOfInputs + " Minimum requirement:" + min);
             }
         }
 
@@ -79,12 +83,12 @@ namespace Adder.Visitors
 
         private bool IsInfinite(Component component)
         {
-            if(component.NrOfInputs < component.InputList.Count)
+            if (component.NrOfInputs < component.InputList.Count)
             {
-                return true;
+                throw new Exception("Infinite loop detected at component: " + component.Name);
             }
             return false;
         }
-       
+
     }
 }
