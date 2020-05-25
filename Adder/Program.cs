@@ -61,14 +61,16 @@ namespace Adder
 
 
             Circuit circuit = new Circuit();
-            circuit.InputNodes.Add(input1);
-            circuit.InputNodes.Add(input2);
-
-
-
-            circuit.OutputNodes.Add(output1);
-            circuit.OutputNodes.Add(output2);
-            
+            //add nodes to circuit
+          
+            circuit.Components.Add(input1);
+            circuit.Components.Add(input2);
+            circuit.Components.Add(not1);
+            circuit.Components.Add(or1);
+            circuit.Components.Add(and1);
+            circuit.Components.Add(nor1);
+            circuit.Components.Add(output1);
+            circuit.Components.Add(output2);
 
             try
             {

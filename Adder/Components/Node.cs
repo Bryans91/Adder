@@ -9,15 +9,6 @@ namespace Adder.Components
 {
     public abstract class Node : Component //Leaf
     {
-      
-        public List<bool> InputList { get; set; }
-        public List<Edge> OutputList { get; set; }
-
-        public string Name { get; set; }
-
-        public bool Output { get; set; }
-
-
         public int NrOfInputs { get; set; }
 
 
@@ -33,14 +24,6 @@ namespace Adder.Components
         {
             base.Run(visitor);
             Handle();
-
-            if (NrOfInputs == InputList.Count)
-            {
-                OutputList.ForEach((Edge edge) =>
-                {
-                    edge.Out.Run(visitor);
-                });
-            }
         }
 
         public virtual void Handle()

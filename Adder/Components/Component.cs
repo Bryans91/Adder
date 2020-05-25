@@ -10,6 +10,11 @@ namespace Adder.Components
 {
     public abstract class Component
     {
+        public List<bool> InputList { get; set; }
+        public List<Edge> OutputList { get; set; }
+
+        public string Name { get; set; }
+        public bool Output { get; set; }
 
         public TimeSpan TimeSpan { get; set; }
         //protected IVisitor _visitor;

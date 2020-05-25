@@ -17,14 +17,14 @@ namespace Adder.Visitors
 
         public void Visit(Circuit visited)
         {
-            int max = visited.InputNodes.Count + visited.OutputNodes.Count + visited.AdderNodes.Count;
-            visited.InputNodes.ForEach((Node node) =>
-            {
-                if(IsInfinite(node,0,max))
-                {
-                    throw new Exception("The circuit contains an infinite loop.");
-                }
-            });
+            //int max = visited.InputNodes.Count + visited.OutputNodes.Count + visited.AdderNodes.Count;
+            //visited.InputNodes.ForEach((Node node) =>
+            //{
+            //    if(IsInfinite(node,0,max))
+            //    {
+            //        throw new Exception("The circuit contains an infinite loop.");
+            //    }
+            //});
         }
 
         public void Visit(Node visited)
@@ -95,7 +95,7 @@ namespace Adder.Visitors
         }
 
 
-        private bool IsInfinite(Node node, int depth , int max)
+        private bool IsInfinite(Component node, int depth , int max)
         {
             foreach(Edge edge in node.OutputList)
             {

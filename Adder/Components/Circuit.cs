@@ -9,23 +9,22 @@ namespace Adder.Components
 {
     public class Circuit : Component //Composite
     {
-        public List<Node> InputNodes { get; private set; } = new List<Node>();
-        public List<Node> OutputNodes { get; private set; } = new List<Node>();
-        public List<Node> AdderNodes { get; set; } = new List<Node>();
+
+
+
+        public List<Component> Components { get; set; }
 
         public Circuit() : base()
         {
-            InputNodes = new List<Node>();
-            OutputNodes = new List<Node>();
-            AdderNodes = new List<Node>();
+            Components = new List<Component>();
         }
 
         public override void Run(IVisitor visitor)
         {
             base.Run(visitor);
-            InputNodes.ForEach((Node node) =>
+            Components.ForEach((Component component) =>
             {
-                node.Run(visitor);
+                component.Run(visitor);
             });
         }
 
