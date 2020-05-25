@@ -32,19 +32,7 @@ namespace Adder.Visitors
             HasCorrectNumberOfInputNodes(visited);
         }
 
-        public void Visit(In visited)
-        {
-            if(!HasNext(visited))
-            {
-                throw new Exception("Input has no endpoint");
-            }
-        }
-
-        public void Visit(Out visited)
-        {
-            HasCorrectNumberOfInputNodes(visited);
-        }
-
+      
         public void Visit(And visited)
         {
             HasCorrectNumberOfInputNodes(visited);

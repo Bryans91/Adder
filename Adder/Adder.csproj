@@ -48,13 +48,11 @@
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\Edge.cs" />
     <Compile Include="Components\Node.cs" />
-    <Compile Include="Components\Nodes\In.cs" />
     <Compile Include="Components\Nodes\And.cs" />
     <Compile Include="Components\Nodes\Not.cs" />
     <Compile Include="Components\Nodes\Nor.cs" />
     <Compile Include="Components\Nodes\Xor.cs" />
     <Compile Include="Components\Nodes\Or.cs" />
-    <Compile Include="Components\Nodes\Out.cs" />
     <Compile Include="Components\Nodes\Nand.cs" />
     <Compile Include="Creators\Builder.cs" />
     <Compile Include="Factories\NodeFactory.cs" />

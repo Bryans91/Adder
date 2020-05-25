@@ -17,10 +17,6 @@ namespace Adder.Visitors
 
         void Visit(Node visited);
 
-        void Visit(In visited);
-
-        void Visit(Out visited);
-
         void Visit(And visited);
 
         void Visit(Nand visited);

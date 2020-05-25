@@ -36,15 +36,6 @@ namespace Adder.Visitors
            // throw new NotImplementedException();
         }
 
-        public void Visit(In visited)
-        {
-            PrintStandardNode(visited);
-        }
-
-        public void Visit(Out visited)
-        {
-            PrintStandardNode(visited);
-        }
 
         public void Visit(And visited)
         {

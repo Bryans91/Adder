@@ -24,8 +24,6 @@ namespace Adder.Factories
             _prototypes["NAND"] = new Nand();
             _prototypes["NOR"] = new Nor();
             _prototypes["OR"] = new Or();
-            _prototypes["PROBE"] = new Out();
-            _prototypes["INPUT"] = new In();
             _prototypes["XOR"] = new Xor();
         }
 
