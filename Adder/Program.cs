@@ -22,7 +22,7 @@ namespace Adder
             Node nor1 = new Nor() { Name = "Nor 1" };
      
             bool input1 = false;
-            bool input2 = false;
+            bool input2 = true;
        
             //Inputs
             not1.AddDefaultInputs(input1); 
@@ -44,7 +44,7 @@ namespace Adder
             //create infinite loop
             //TODO: Fix check issue
             //WORKS FOR INFINITE: or1.OutputList.Add(new Edge(or1, not1));
-            //DOES NOT WORK FOR INFINITE or1.AddOutput(not1);
+            //DOES NOT WORK FOR INFINITE or1.AddOutput(not1); gooit geen error maar gaat ook niet fout
 
             Circuit circuit = new Circuit() { Name = "Circuit 1" };
             circuit.Components.Add(not1);
@@ -53,10 +53,11 @@ namespace Adder
             circuit.Components.Add(nor1);
 
 
+
             try {
                 circuit.Run(new Validator());
-                //circuit.Run(new Cleaner());
-                //circuit.Run(new Displayer());
+                circuit.Run(new Cleaner());
+                circuit.Run(new Displayer());
                 circuit.PrintTime();
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
