@@ -69,7 +69,7 @@ namespace Adder.Components
             return InputList.Count >= NrOfInputs;
         }
 
-        protected void SetDefaultInputs()
+        public void SetDefaultInputs()
         {
             if (InputList.Count == 0 && DefaultInputs.Count > 0)
             {

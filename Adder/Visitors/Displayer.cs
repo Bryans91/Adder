@@ -22,17 +22,6 @@ namespace Adder.Visitors
 
         public void Visit(Node visited)
         {
-
-            //Console.WriteLine("\nNode " + visited.Name + "\n");
-            //visited.InputList.ForEach((bool input) =>
-            //{
-            //    Console.Write(input);
-            //});
-
-
-            //Console.WriteLine("\nOutput: " + visited.Output + "\n");
-
-           // throw new NotImplementedException();
         }
 
 

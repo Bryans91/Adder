@@ -49,10 +49,13 @@ namespace Adder
             circuit.Components.Add(and1);
             circuit.Components.Add(nor1);
 
+           
+
             try {
                 //circuit.Run(new Validator());
                 //circuit.Run(new Cleaner());
                 circuit.Run(new Displayer());
+                circuit.PrintTime();
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
             }
