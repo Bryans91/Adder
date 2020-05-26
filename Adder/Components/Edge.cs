@@ -8,10 +8,10 @@ namespace Adder.Components
 {
     public class Edge
     {
-        public Component In { get; set; }
-        public Component Out { get; set; }
+        public Node In { get; set; }
+        public Node Out { get; set; }
 
-        public Edge(Component nodeIn, Component nodeOut)
+        public Edge(Node nodeIn, Node nodeOut)
         {
             In = nodeIn;
             Out = nodeOut;

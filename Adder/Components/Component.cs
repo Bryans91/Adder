@@ -10,27 +10,11 @@ namespace Adder.Components
 {
     public abstract class Component
     {
-
-        //Dit mag mogelijk naar Node verplaatst worden als dit niet gebruikt gaat worden voor circuits
-        public List<bool> DefaultInputs { get; set; }
-        public List<bool> InputList { get; set; }
-        public List<Edge> OutputList { get; set; }
-        public bool Output { get; set; }
-        public int NrOfInputs { get; set; }
-
-
         public string Name { get; set; }
    
         public bool Printed { get; set; } = false;
         public TimeSpan TimeSpan { get; set; }
       
-
-        public Component()
-        {
-            OutputList = new List<Edge>();
-            InputList = new List<bool>();
-            DefaultInputs = new List<bool>();
-        }
 
         public virtual void Run(IVisitor visitor)
         {
@@ -45,31 +29,6 @@ namespace Adder.Components
             //this.PrintTime();
         }
 
-        //Mogelijk verplaatsen naar node
-        public virtual void AddOutput(Component output)
-        {
-            this.OutputList.Add(new Edge(this, output));
-            output.NrOfInputs++;
-        }
-
-        public virtual void AddDefaultInputs(bool input)
-        {
-            this.DefaultInputs.Add(input);
-            this.NrOfInputs++;
-        }
-   
-        public virtual bool IsResolveable()
-        {
-            return InputList.Count >= NrOfInputs;
-        }
-
-        protected void SetDefaultInputs()
-        {
-            if(InputList.Count == 0 && DefaultInputs.Count > 0)
-            {
-                InputList.AddRange(DefaultInputs);
-            }
-        }
 
         public virtual void Accept(IVisitor visitor)
         {

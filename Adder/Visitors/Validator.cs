@@ -81,7 +81,7 @@ namespace Adder.Visitors
         }
 
 
-        private bool IsInfinite(Component component)
+        private bool IsInfinite(Node component)
         {
             if (component.NrOfInputs < component.InputList.Count)
             {

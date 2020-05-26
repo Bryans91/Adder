@@ -55,10 +55,10 @@ namespace Adder.Visitors
             ResetNode(visited);
         }
 
-        private void ResetNode(Component component)
+        private void ResetNode(Node node)
         {
-            ResetPrinted(component);
-            ResetInputs(component);
+            ResetPrinted(node);
+            ResetInputs(node);
         }
 
         private void ResetPrinted(Component component)
@@ -66,11 +66,9 @@ namespace Adder.Visitors
             component.Printed = false;
         }
 
-        private void ResetInputs(Component component)
+        private void ResetInputs(Node node)
         {
-            //TODO: Probleem oplossen, sommige inputs komen nergens vandaan / zijn default dus deze moeten niet gewist worden bij een cleanup
-
-            component.InputList.Clear();
+            node.InputList.Clear();
         }
     }
 }
