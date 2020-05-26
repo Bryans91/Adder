@@ -27,8 +27,6 @@ namespace Adder.Components
                     }
                 });
             }
-            
-
         }
 
         public virtual void Handle()

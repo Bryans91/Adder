@@ -11,7 +11,7 @@ namespace Adder.Components
         public Component In { get; set; }
         public Component Out { get; set; }
 
-        public Edge(Node nodeIn, Node nodeOut)
+        public Edge(Component nodeIn, Component nodeOut)
         {
             In = nodeIn;
             Out = nodeOut;

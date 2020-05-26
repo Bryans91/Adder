@@ -13,10 +13,6 @@ namespace Adder
     {
         static void Main(string[] args)
         {
-
-            IVisitor validator = new Validator();
-            IVisitor displayer = new Displayer();
-
             /** Basic circuit **/
             //Adder
             Node not1 = new Not() { Name = "Not 1" };
@@ -24,53 +20,39 @@ namespace Adder
 
             Node and1 = new And() { Name = "And 1" };
             Node nor1 = new Nor() { Name = "Nor 1" };
-
-
-
      
-            bool input1 = false;
-            bool input2 = true;
-
-
+            bool input1 = true;
+            bool input2 = false;
+       
             //Edges
-            not1.DefaultInputs.Add(input1); //input 1
-            not1.NrOfInputs = 1;
+            not1.AddDefaultInputs(input1); //input 1
+    
+            or1.AddDefaultInputs(input1);
+            or1.AddDefaultInputs(input2);
 
-
-            or1.DefaultInputs.Add(input1);
-            or1.DefaultInputs.Add(input2);
-            or1.NrOfInputs = 2;
-
-            not1.OutputList.Add(new Edge(not1, and1));
-            or1.OutputList.Add(new Edge(or1, and1));
-            and1.NrOfInputs = 2;
 
             //endpoint AND
-
-            not1.OutputList.Add(new Edge(not1, nor1));
-            or1.OutputList.Add(new Edge(or1, nor1));
-            nor1.NrOfInputs = 2;
+            not1.AddOutput(and1);
+            or1.AddOutput(and1);
 
             //endpoint NOR
-           
+            not1.AddOutput(nor1);
+            or1.AddOutput(nor1);
 
 
             //create infinite loop
-            //nor1.OutputList.Add(new Edge(nor1, not1));
-
-
+           // nor1.AddOutput(not1);
+          
             Circuit circuit = new Circuit() { Name = "Circuit 1" };
-            //add nodes to circuit
-   
             circuit.Components.Add(not1);
             circuit.Components.Add(or1);
             circuit.Components.Add(and1);
             circuit.Components.Add(nor1);
 
             try {
-                circuit.Run(displayer);
+                circuit.Run(new Validator());
                 circuit.Run(new Cleaner());
-                circuit.Run(displayer);
+                circuit.Run(new Displayer());
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
             }
