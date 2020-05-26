@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Adder.Components;
-using Adder.Visitors;
 using Adder.Components.Nodes;
+using Adder.Visitors;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
-namespace Adder
+namespace UnitTests.Visitors
 {
-    class Program
+    [TestClass]
+    public class ValidatorTest
     {
-        static void Main(string[] args)
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void TestInfiniteLoop()
         {
+
             /** Basic circuit **/
             //Adder
             Node not1 = new Not() { Name = "Not 1" };
@@ -20,17 +21,16 @@ namespace Adder
 
             Node and1 = new And() { Name = "And 1" };
             Node nor1 = new Nor() { Name = "Nor 1" };
-     
-            bool input1 = false;
+
+            bool input1 = true;
             bool input2 = false;
-       
-            //Inputs
-            not1.AddDefaultInputs(input1); 
-   
+
+            //Edges
+            not1.AddDefaultInputs(input1); //input 1
+
             or1.AddDefaultInputs(input1);
             or1.AddDefaultInputs(input2);
 
-            //Edges
 
             //endpoint AND
             not1.AddOutput(and1);
@@ -42,9 +42,7 @@ namespace Adder
 
 
             //create infinite loop
-            //TODO: Fix check issue
-            //WORKS FOR INFINITE: or1.OutputList.Add(new Edge(or1, not1));
-            //DOES NOT WORK FOR INFINITE or1.AddOutput(not1);
+            or1.OutputList.Add(new Edge(or1, not1));
 
             Circuit circuit = new Circuit() { Name = "Circuit 1" };
             circuit.Components.Add(not1);
@@ -52,22 +50,9 @@ namespace Adder
             circuit.Components.Add(and1);
             circuit.Components.Add(nor1);
 
-
-            try {
-                circuit.Run(new Validator());
-                //circuit.Run(new Cleaner());
-                //circuit.Run(new Displayer());
-                circuit.PrintTime();
-            } catch(Exception e) {
-                Console.WriteLine(e.Message);
-            }
-
-
-            Console.WriteLine("ended");
-
-
-
-            Console.Read();
+     
+            circuit.Run(new Validator());
+         
         }
     }
 }

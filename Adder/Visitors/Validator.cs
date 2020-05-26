@@ -71,7 +71,7 @@ namespace Adder.Visitors
         {
             if (node.NrOfInputs < min)
             {
-                throw new Exception(node.Name + "Does not have enough inputs. Has:" + node.NrOfInputs + " Minimum requirement:" + min);
+                throw new Exception("Node: "+ node.Name + " does not have enough inputs. Has:" + node.NrOfInputs + " Minimum requirement:" + min);
             }
         }
 
@@ -81,11 +81,11 @@ namespace Adder.Visitors
         }
 
 
-        private bool IsInfinite(Node component)
+        private bool IsInfinite(Node node)
         {
-            if (component.NrOfInputs < component.InputList.Count)
+            if (node.NrOfInputs < node.InputList.Count)
             {
-                throw new Exception("Infinite loop detected at component: " + component.Name);
+                throw new Exception("Infinite loop detected at node: " + node.Name);
             }
             return false;
         }

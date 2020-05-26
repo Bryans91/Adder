@@ -21,12 +21,10 @@ namespace Adder.Components
             Stopwatch timer = new Stopwatch();
             timer.Start();
 
-
             this.Accept(visitor);
 
             timer.Stop();
             this.TimeSpan = timer.Elapsed;
-            //this.PrintTime();
         }
 
 
@@ -37,7 +35,7 @@ namespace Adder.Components
 
         public void PrintTime()
         {
-            Console.WriteLine("Time elapsed (microseconds): {0}", TimeSpan.Ticks / 1000);
+            Console.WriteLine("{0} ran for: {1} (microseconds)",  this.Name, TimeSpan.Ticks / 1000);
         }
     }
 }
