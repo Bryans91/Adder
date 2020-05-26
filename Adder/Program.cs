@@ -50,8 +50,8 @@ namespace Adder
             circuit.Components.Add(nor1);
 
             try {
-                circuit.Run(new Validator());
-                circuit.Run(new Cleaner());
+                //circuit.Run(new Validator());
+                //circuit.Run(new Cleaner());
                 circuit.Run(new Displayer());
             } catch(Exception e) {
                 Console.WriteLine(e.Message);

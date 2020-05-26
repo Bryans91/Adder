@@ -11,6 +11,7 @@ namespace Adder.Components
     {
         public override void Run(IVisitor visitor)
         {
+            SetDefaultInputs();
             Handle(); //Do node action
 
             base.Run(visitor);

@@ -37,11 +37,8 @@ namespace Adder.Components
             Stopwatch timer = new Stopwatch();
             timer.Start();
 
-            SetDefaultInputs();
-      
 
             this.Accept(visitor);
-
 
             timer.Stop();
             this.TimeSpan = timer.Elapsed;
@@ -66,7 +63,7 @@ namespace Adder.Components
             return InputList.Count >= NrOfInputs;
         }
 
-        private void SetDefaultInputs()
+        protected void SetDefaultInputs()
         {
             if(InputList.Count == 0 && DefaultInputs.Count > 0)
             {
