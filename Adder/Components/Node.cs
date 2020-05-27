@@ -57,6 +57,12 @@ namespace Adder.Components
             output.NrOfInputs++;
         }
 
+        public virtual void AddInput(Node input)
+        {
+            input.OutputList.Add(new Edge(input, this));
+            this.NrOfInputs++;
+        }
+
         //Add input not coming from nodes
         public virtual void AddDefaultInputs(bool input)
         {

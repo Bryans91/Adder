@@ -45,12 +45,15 @@ namespace Adder
             //TODO: Fix check issue
             //WORKS FOR INFINITE: or1.OutputList.Add(new Edge(or1, not1));
             //DOES NOT WORK FOR INFINITE or1.AddOutput(not1); gooit geen error maar gaat ook niet fout
+           // or1.AddOutput(not1);
 
             Circuit circuit = new Circuit() { Name = "Circuit 1" };
             circuit.Components.Add(not1);
             circuit.Components.Add(or1);
             circuit.Components.Add(and1);
             circuit.Components.Add(nor1);
+            // add this to detect the infinite, also infinite when not infinite
+            //circuit.Components.Add(not1);
 
 
 
