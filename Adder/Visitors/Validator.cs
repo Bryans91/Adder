@@ -17,75 +17,61 @@ namespace Adder.Visitors
 
         public void Visit(Circuit visited)
         {
-            int max = visited.InputNodes.Count + visited.OutputNodes.Count + visited.AdderNodes.Count;
-            visited.InputNodes.ForEach((Node node) =>
+            if (visited.Components.Count == 0)
             {
-                if(IsInfinite(node,0,max))
-                {
-                    throw new Exception("The circuit contains an infinite loop.");
-                }
-            });
+                throw new Exception("The circuit has no nodes.");
+            }
+
         }
 
         public void Visit(Node visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            throw new Exception("An abstract node has been created.");
         }
 
-        public void Visit(In visited)
-        {
-            if(!HasNext(visited))
-            {
-                throw new Exception("Input has no endpoint");
-            }
-        }
-
-        public void Visit(Out visited)
-        {
-            HasCorrectNumberOfInputNodes(visited);
-        }
 
         public void Visit(And visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            HasCorrectNumberOfInputNodes(visited, 2);
+            IsInfinite(visited);
         }
 
         public void Visit(Nand visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            HasCorrectNumberOfInputNodes(visited, 2);
+            IsInfinite(visited);
         }
 
         public void Visit(Nor visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            HasCorrectNumberOfInputNodes(visited, 2);
+            IsInfinite(visited);
         }
 
         public void Visit(Not visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            HasCorrectNumberOfInputNodes(visited, 1);
+            IsInfinite(visited);
         }
 
         public void Visit(Or visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            HasCorrectNumberOfInputNodes(visited, 2);
+            IsInfinite(visited);
         }
 
         public void Visit(Xor visited)
         {
-            HasCorrectNumberOfInputNodes(visited);
+            HasCorrectNumberOfInputNodes(visited, 2);
+            IsInfinite(visited);
         }
 
 
-        private void HasCorrectNumberOfInputNodes(Node node)
+        private void HasCorrectNumberOfInputNodes(Node node, int min)
         {
-            if (node.InputList.Count > 0)
+            if (node.NrOfInputs < min)
             {
-                if (node.NrOfInputs != node.InputList.Count)
-                {
-                    throw new Exception(node.Name + " Does not have enough input Nodes. Has:" + node.InputList.Count + " Requires:" + node.NrOfInputs);
-                }
-            } else {
-                throw new Exception(node.Name + " Does not have any inputs.");
+                throw new Exception("Node: "+ node.Name + " does not have enough inputs. Has:" + node.NrOfInputs + " Minimum requirement:" + min);
             }
         }
 
@@ -95,19 +81,14 @@ namespace Adder.Visitors
         }
 
 
-        private bool IsInfinite(Node node, int depth , int max)
+        private bool IsInfinite(Node node)
         {
-            foreach(Edge edge in node.OutputList)
+            if (node.NrOfInputs < node.InputList.Count)
             {
-                if(depth > max)
-                {
-                    return true;
-                }
-
-                return IsInfinite(edge.Out, depth+1, max);
+                throw new Exception("Infinite loop detected at node: " + node.Name);
             }
             return false;
         }
-       
+
     }
 }

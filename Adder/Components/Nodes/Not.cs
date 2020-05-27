@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Adder.Visitors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,18 +11,22 @@ namespace Adder.Components.Nodes
     {
         public override void Handle()
         {
-            Output = true;
+            base.Handle();
+            this.Output = true;
 
             InputList.ForEach((bool input) =>
             {
                 if (input)
                 {
-                    Output = false;
+                    this.Output = false;
                 }
             });
+        }
 
 
-            base.Handle();
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
         }
 
         public override Node Clone()

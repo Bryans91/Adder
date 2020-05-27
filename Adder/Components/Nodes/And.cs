@@ -11,6 +11,8 @@ namespace Adder.Components.Nodes
     {
         public override void Handle()
         {
+            base.Handle();
+
             Output = true;
 
             InputList.ForEach((bool input) =>
@@ -20,9 +22,6 @@ namespace Adder.Components.Nodes
                     Output = false;
                 }
             });
-
-
-            base.Handle();
         }
 
         public override void Accept(IVisitor visitor)

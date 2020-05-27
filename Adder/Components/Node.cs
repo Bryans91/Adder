@@ -9,47 +9,79 @@ namespace Adder.Components
 {
     public abstract class Node : Component //Leaf
     {
-      
+
+        public List<bool> DefaultInputs { get; set; }
         public List<bool> InputList { get; set; }
         public List<Edge> OutputList { get; set; }
 
-        public string Name { get; set; }
-
         public bool Output { get; set; }
-
-
         public int NrOfInputs { get; set; }
 
-
-        public Node() : base()
+        public Node()
         {
             OutputList = new List<Edge>();
             InputList = new List<bool>();
-            Output = false;
+            DefaultInputs = new List<bool>();
         }
-
 
         public override void Run(IVisitor visitor)
         {
+            
+            Handle(); //Do node action
+
             base.Run(visitor);
-            Handle();
-        }
 
-        public virtual void Handle()
-        {
-
-            //stuur output naar edges
-   
-            if (NrOfInputs == InputList.Count)
+            //pass Data on
+            if (IsResolveable())
             {
                 OutputList.ForEach((Edge edge) =>
                 {
                     edge.Out.InputList.Add(Output);
+                    if(edge.Out.IsResolveable())
+                    {
+                        edge.Out.Run(visitor);
+                    }
                 });
             }
         }
-   
 
+        //This runs before the specific node handle
+        public virtual void Handle()
+        {
+            SetDefaultInputs();
+        }
+
+        public virtual void AddOutput(Node output)
+        {
+            this.OutputList.Add(new Edge(this, output));
+            output.NrOfInputs++;
+        }
+
+        public virtual void AddInput(Node input)
+        {
+            input.OutputList.Add(new Edge(input, this));
+            this.NrOfInputs++;
+        }
+
+        //Add input not coming from nodes
+        public virtual void AddDefaultInputs(bool input)
+        {
+            this.DefaultInputs.Add(input);
+            this.NrOfInputs++;
+        }
+
+        public virtual bool IsResolveable()
+        {
+            return InputList.Count >= NrOfInputs;
+        }
+
+        public void SetDefaultInputs()
+        {
+            if (InputList.Count == 0 && DefaultInputs.Count > 0)
+            {
+                InputList.AddRange(DefaultInputs);
+            }
+        }
 
         public override void Accept(IVisitor visitor)
         {

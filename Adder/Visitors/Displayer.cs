@@ -17,63 +17,63 @@ namespace Adder.Visitors
 
         public void Visit(Circuit visited)
         {
-            Console.WriteLine("this is a circuit");
-            //throw new NotImplementedException();
+            Console.WriteLine("Circuit: "+ visited.Name);
         }
 
         public void Visit(Node visited)
         {
-
-            Console.WriteLine("\nNode " + visited.Name + "\n");
-            visited.InputList.ForEach((bool input) =>
-            {
-                Console.Write(input);
-            });
-
-
-            Console.WriteLine("\nOutput: " + visited.Output + "\n");
-
-           // throw new NotImplementedException();
         }
 
-        public void Visit(In visited)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Visit(Out visited)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Visit(And visited)
         {
-            throw new NotImplementedException();
+            PrintStandardNode(visited);
         }
 
         public void Visit(Nand visited)
         {
-            throw new NotImplementedException();
+            PrintStandardNode(visited);
         }
 
         public void Visit(Nor visited)
         {
-            throw new NotImplementedException();
+            PrintStandardNode(visited);
         }
 
         public void Visit(Not visited)
         {
-            throw new NotImplementedException();
+            PrintStandardNode(visited);
         }
 
         public void Visit(Or visited)
         {
-            throw new NotImplementedException();
+            PrintStandardNode(visited);
         }
 
         public void Visit(Xor visited)
         {
-            throw new NotImplementedException();
+            PrintStandardNode(visited);
+        }
+
+        private void PrintStandardNode(Node node)
+        {
+            if (node.IsResolveable() && !node.Printed)
+            {
+                node.Printed = true;
+
+                if (node.OutputList.Count > 0)
+                {
+                    Console.WriteLine("Node " + node.Name + " Outputs " + node.Output + " To:");
+                    node.OutputList.ForEach((Edge e) =>
+                    {
+                        Console.WriteLine(e.Out.Name);
+                    });
+                }
+                else
+                {
+                    Console.WriteLine("Node " + node.Name + " Outputs " + node.Output);
+                }
+            }
         }
     }
 }
