@@ -3,29 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Adder.Factories;
+using Adder.Components;
 
 namespace Adder.Builders
 {
     class Builder : IBuilder
     {
-        public void BuildEdges()
-        {
-            throw new NotImplementedException();
-        }
+        private NodeFactory nodeFactory;
 
-        public void BuildGridNodes()
+        public Builder()
         {
-            throw new NotImplementedException();
-        }
-
-        public void BuildInputNodes()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void BuildOutputNodes()
-        {
-            throw new NotImplementedException();
+            nodeFactory = NodeFactory.GetInstance();
         }
     }
 }

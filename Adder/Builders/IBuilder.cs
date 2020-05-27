@@ -8,9 +8,5 @@ namespace Adder.Builders
 {
     interface IBuilder
     {
-        void BuildEdges();
-        void BuildGridNodes();
-        void BuildInputNodes();
-        void BuildOutputNodes();
     }
 }

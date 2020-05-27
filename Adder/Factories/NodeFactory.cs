@@ -8,11 +8,21 @@ using Adder.Components;
 
 namespace Adder.Factories
 {
-    class NodeFactory
+    public class NodeFactory
     {
-		private Dictionary<string, Node> _prototypes = new Dictionary<string, Node>();
+        private static NodeFactory instance = null;
+        private Dictionary<string, Node> _prototypes = new Dictionary<string, Node>();
 
-        public NodeFactory()
+        public static NodeFactory GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new NodeFactory();
+            }
+            return instance;
+        }
+
+        private NodeFactory()
         {
             Initialize();
         }
@@ -24,9 +34,10 @@ namespace Adder.Factories
             _prototypes["NAND"] = new Nand();
             _prototypes["NOR"] = new Nor();
             _prototypes["OR"] = new Or();
-            _prototypes["PROBE"] = new Out();
-            _prototypes["INPUT"] = new In();
             _prototypes["XOR"] = new Xor();
+
+            _prototypes["INPUT"] = new In();
+            _prototypes["OUTPUT"] = new Out();
         }
 
         public void RegisterNode(string name, Node node)
