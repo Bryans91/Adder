@@ -35,9 +35,6 @@ namespace Adder.Factories
             _prototypes["NOR"] = new Nor();
             _prototypes["OR"] = new Or();
             _prototypes["XOR"] = new Xor();
-
-            _prototypes["INPUT"] = new In();
-            _prototypes["OUTPUT"] = new Out();
         }
 
         public void RegisterNode(string name, Node node)
@@ -47,9 +44,11 @@ namespace Adder.Factories
 
         public Node Create(String type)
         {
-            Node prototype = _prototypes[type];
+            return _prototypes[type].Clone();
 
-            return prototype.Clone();
+            //prototype = prototype.Clone();
+
+            //return prototype;
         }
     }
 }

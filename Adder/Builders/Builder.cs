@@ -10,11 +10,32 @@ namespace Adder.Builders
 {
     class Builder : IBuilder
     {
-        private NodeFactory nodeFactory;
+        private Node node;
 
-        public Builder()
+        public Builder(String type)
         {
-            nodeFactory = NodeFactory.GetInstance();
+            NodeFactory nodeFactory = NodeFactory.GetInstance();
+            node = nodeFactory.Create(type);
+        }
+
+        public void addEdges()
+        {
+
+        }
+
+        public void setName(String name)
+        {
+            node.Name = name;
+        }
+
+        public void AddDefaultInput(bool input)
+        {
+            node.AddDefaultInputs(input);
+        }
+
+        public Node Result()
+        {
+            return node;
         }
     }
 }

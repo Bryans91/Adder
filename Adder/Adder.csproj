@@ -55,7 +55,6 @@
     <Compile Include="Components\Nodes\Xor.cs" />
     <Compile Include="Components\Nodes\Or.cs" />
     <Compile Include="Components\Nodes\Nand.cs" />
-    <Compile Include="Creators\Builder.cs" />
     <Compile Include="Factories\NodeFactory.cs" />
     <Compile Include="IO\ConsoleIO.cs" />
     <Compile Include="IO\FileParser.cs" />

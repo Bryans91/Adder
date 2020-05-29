@@ -5,13 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
+using Adder.Factories;
+using Adder.Components;
+using Adder.Builders;
 
 namespace Adder.IO
 {
     public class FileParser
     {
 
-        public void ParseCircuit(String filePath)
+        public bool A = false;
+        public bool B = false;
+        public bool Cin = false;
+        IDictionary<string, Node> NodeDictionairy = new Dictionary<string, Node>();
+        Circuit circuit;
+
+        public Circuit ParseCircuit(String filePath)
         {
             FileReader fr = new FileReader(filePath);
             Boolean readingEdges = false;
@@ -19,6 +28,9 @@ namespace Adder.IO
 
             if (lines != null)
             {
+
+                circuit = new Circuit() { Name = "Circuit 1" };
+
                 foreach (String line in lines)
                 {
                     if (line.Equals("# Description of all the edges"))
@@ -36,32 +48,94 @@ namespace Adder.IO
                             }
                             else
                             {
-                                AddNode(circuitParts);
+                                Node node = AddNode(circuitParts);
+                                if (node != null)
+                                {
+                                    NodeDictionairy[node.Name] = node;
+                                }
                             }
                         }
                     }
                 }
+
+                return circuit;
             }
+
+            return null;
         }
 
-        private void AddNode(String[] nodeParts)
+        private Node AddNode(String[] nodeParts)
         {
-            Console.WriteLine(nodeParts[0] + " has the following output:");
-            foreach(String part in nodeParts.Skip(1))
+            if ( ! nodeParts[1].Contains("INPUT") && ! nodeParts[1].Contains("PROBE"))
             {
-                Console.WriteLine("- " + part);
+                Builder nodeBuilder = new Builder(nodeParts[1]);
+                nodeBuilder.setName(nodeParts[0]);
+
+                return nodeBuilder.Result();
             }
-            Console.WriteLine("-------------------");
+            if (nodeParts[1].Contains("INPUT"))
+            {
+                switch(nodeParts[0])
+                {
+                    case "A":
+                        A = nodeParts[1].Contains("HIGH") ? true : false;
+                        break;
+                    case "B":
+                        B = nodeParts[1].Contains("HIGH") ? true : false;
+                        break;
+                    case "Cin":
+                        Cin = nodeParts[1].Contains("HIGH") ? true : false;
+                        break;
+                }
+            }
+
+            return null;
         }
 
         private void AddEdges(String[] edgeParts)
         {
-            Console.WriteLine(edgeParts[0] + " has the following edges:");
-            foreach (String part in edgeParts.Skip(1))
+
+            bool inputType = false;
+            bool input = false;
+
+            if ( ! edgeParts[0].StartsWith("NODE"))
             {
-                Console.WriteLine("- " + part);
+                inputType = true;
+
+                switch (edgeParts[0])
+                {
+                    case "A":
+                        input = A;
+                        break;
+                    case "B":
+                        input = B;
+                        break;
+                    case "Cin":
+                        input = Cin;
+                        break;
+                }
             }
-            Console.WriteLine("-------------------");
+
+            foreach(String edgePart in edgeParts.Skip(1))
+            {
+                if (edgePart.StartsWith("NODE"))
+                {
+                    if(inputType)
+                    {
+                        NodeDictionairy[edgePart].AddDefaultInputs(input);
+                    }
+                    else
+                    {
+                        NodeDictionairy[edgeParts[0]].AddOutput(NodeDictionairy[edgePart]);
+                    }
+                }
+            }
+
+            if (!inputType)
+            {
+                circuit.Components.Add(NodeDictionairy[edgeParts[0]]);
+            }
+
         }
 
         private String[] GetCircuitParts(String line)
