@@ -103,12 +103,14 @@ namespace Adder.IO
 
                     if (inputType)
                     {
-                        NodeDictionairy[edgePart].AddDefaultInputs(input);
+                        NodeDictionairy[edgePart].AddDefaultInputs(edgeParts[0],input);
                     }
                     else
                     {
                         NodeDictionairy[edgeParts[0]].AddOutput(NodeDictionairy[edgePart]);
                     }
+                } else {
+                    NodeDictionairy[edgeParts[0]].OutputName = edgePart;
                 }
             }
 

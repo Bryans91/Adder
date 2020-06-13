@@ -27,8 +27,8 @@ namespace UnitTests.Nodes
         {
             Node node = new Not();
 
-            node.AddDefaultInputs(false);
-            node.AddDefaultInputs(true);
+            node.AddDefaultInputs("IN1", false);
+            node.AddDefaultInputs("IN2", true);
             node.SetDefaultInputs();
 
             Assert.AreEqual(2, node.NrOfInputs);

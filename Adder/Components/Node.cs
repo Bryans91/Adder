@@ -10,18 +10,21 @@ namespace Adder.Components
     public abstract class Node : Component //Leaf
     {
 
-        public List<bool> DefaultInputs { get; set; }
+        public Dictionary<string, bool> DefaultInputs { get; set; }
         public List<bool> InputList { get; set; }
         public List<Edge> OutputList { get; set; }
 
         public bool Output { get; set; }
         public int NrOfInputs { get; set; }
 
+        public string OutputName { get; set; }
+
         public Node()
         {
             OutputList = new List<Edge>();
             InputList = new List<bool>();
-            DefaultInputs = new List<bool>();
+            DefaultInputs = new Dictionary<string, bool>();
+            OutputName = null;
         }
 
         public override void Run(IVisitor visitor)
@@ -64,9 +67,9 @@ namespace Adder.Components
         }
 
         //Add input not coming from nodes
-        public void AddDefaultInputs(bool input)
+        public void AddDefaultInputs(string name,bool input)
         {
-            this.DefaultInputs.Add(input);
+            this.DefaultInputs.Add(name, input);
             this.NrOfInputs++;
         }
 
@@ -79,7 +82,7 @@ namespace Adder.Components
         {
             if (InputList.Count == 0 && DefaultInputs.Count > 0)
             {
-                InputList.AddRange(DefaultInputs);
+                InputList.AddRange(DefaultInputs.Values);
             }
         }
 

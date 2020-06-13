@@ -14,7 +14,7 @@ namespace UnitTests.Nodes
         public void TestHandle()
         {
             Node node = new Not();
-            node.AddDefaultInputs(false);
+            node.AddDefaultInputs("IN1", false);
             node.SetDefaultInputs();
 
             node.Handle();
@@ -26,7 +26,7 @@ namespace UnitTests.Nodes
         public void TestHandleNegative()
         {
             Node node = new Not();
-            node.AddDefaultInputs(true);
+            node.AddDefaultInputs("IN2", true);
      
             node.SetDefaultInputs();
 

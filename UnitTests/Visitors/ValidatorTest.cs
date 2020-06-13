@@ -26,10 +26,10 @@ namespace UnitTests.Visitors
             bool input2 = false;
 
             //Edges
-            not1.AddDefaultInputs(input1); //input 1
+            not1.AddDefaultInputs("IN1", input1); //input 1
 
-            or1.AddDefaultInputs(input1);
-            or1.AddDefaultInputs(input2);
+            or1.AddDefaultInputs("IN1", input1);
+            or1.AddDefaultInputs("IN2", input2);
 
 
             //endpoint AND

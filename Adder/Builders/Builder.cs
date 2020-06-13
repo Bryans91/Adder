@@ -28,9 +28,9 @@ namespace Adder.Builders
             node.Name = name;
         }
 
-        public void AddDefaultInput(bool input)
+        public void AddDefaultInput(string name, bool input)
         {
-            node.AddDefaultInputs(input);
+            node.AddDefaultInputs(name, input);
         }
 
         public Node Result()
