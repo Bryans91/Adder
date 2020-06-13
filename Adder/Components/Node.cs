@@ -39,7 +39,7 @@ namespace Adder.Components
                     edge.Out.InputList.Add(Output);
                     if(edge.Out.IsResolveable())
                     {
-                        edge.Out.Run(visitor);
+                      //  edge.Out.Run(visitor);
                     }
                 });
             }
@@ -51,20 +51,20 @@ namespace Adder.Components
             SetDefaultInputs();
         }
 
-        public virtual void AddOutput(Node output)
+        public void AddOutput(Node output)
         {
             this.OutputList.Add(new Edge(this, output));
             output.NrOfInputs++;
         }
 
-        public virtual void AddInput(Node input)
+        public void AddInput(Node input)
         {
             input.OutputList.Add(new Edge(input, this));
             this.NrOfInputs++;
         }
 
         //Add input not coming from nodes
-        public virtual void AddDefaultInputs(bool input)
+        public void AddDefaultInputs(bool input)
         {
             this.DefaultInputs.Add(input);
             this.NrOfInputs++;

@@ -23,7 +23,7 @@ namespace Adder.IO
         public Circuit ParseCircuit(String filePath)
         {
             FileReader fr = new FileReader(filePath);
-            Boolean readingEdges = false;
+            bool readingEdges = false;
             List<String> lines = fr.GetLines();
 
             if (lines != null)
@@ -37,6 +37,7 @@ namespace Adder.IO
                     {
                         readingEdges = true;
                     }
+
                     if ( ! line.StartsWith("#") && !String.IsNullOrEmpty(line))
                     {
                         if (line.Contains(":") && line.EndsWith(";"))
@@ -118,9 +119,11 @@ namespace Adder.IO
 
             foreach(String edgePart in edgeParts.Skip(1))
             {
+               
                 if (edgePart.StartsWith("NODE"))
                 {
-                    if(inputType)
+
+                    if (inputType)
                     {
                         NodeDictionairy[edgePart].AddDefaultInputs(input);
                     }

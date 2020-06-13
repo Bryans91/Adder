@@ -83,6 +83,7 @@ namespace Adder.Visitors
 
         private bool IsInfinite(Node node)
         {
+           
             if (node.NrOfInputs < node.InputList.Count)
             {
                 throw new Exception("Infinite loop detected at node: " + node.Name);
