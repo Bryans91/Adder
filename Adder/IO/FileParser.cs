@@ -17,6 +17,7 @@ namespace Adder.IO
         public bool A = false;
         public bool B = false;
         public bool Cin = false;
+        IDictionary<string, bool> InputDictionary = new Dictionary<string, bool>();
         IDictionary<string, Node> NodeDictionairy = new Dictionary<string, Node>();
         Circuit circuit;
 
@@ -76,18 +77,7 @@ namespace Adder.IO
             }
             if (nodeParts[1].Contains("INPUT"))
             {
-                switch(nodeParts[0])
-                {
-                    case "A":
-                        A = nodeParts[1].Contains("HIGH") ? true : false;
-                        break;
-                    case "B":
-                        B = nodeParts[1].Contains("HIGH") ? true : false;
-                        break;
-                    case "Cin":
-                        Cin = nodeParts[1].Contains("HIGH") ? true : false;
-                        break;
-                }
+                InputDictionary.Add(nodeParts[0], nodeParts[1].Contains("HIGH") ? true : false);
             }
 
             return null;
@@ -99,22 +89,10 @@ namespace Adder.IO
             bool inputType = false;
             bool input = false;
 
-            if ( ! edgeParts[0].StartsWith("NODE"))
+            if (!edgeParts[0].StartsWith("NODE"))
             {
                 inputType = true;
-
-                switch (edgeParts[0])
-                {
-                    case "A":
-                        input = A;
-                        break;
-                    case "B":
-                        input = B;
-                        break;
-                    case "Cin":
-                        input = Cin;
-                        break;
-                }
+                input = InputDictionary[edgeParts[0]];
             }
 
             foreach(String edgePart in edgeParts.Skip(1))
