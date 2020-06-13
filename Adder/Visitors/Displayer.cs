@@ -22,6 +22,7 @@ namespace Adder.Visitors
 
         public void Visit(Node visited)
         {
+
         }
 
 
@@ -63,10 +64,10 @@ namespace Adder.Visitors
 
                 if (node.OutputList.Count > 0)
                 {
-                    Console.WriteLine("Node " + node.Name + " Outputs " + node.Output + " To:");
+                    Console.WriteLine("Node " + node.Name + " " + node.GetType().Name + " Outputs " + node.Output + " To:");
                     node.OutputList.ForEach((Edge e) =>
                     {
-                        Console.WriteLine(e.Out.Name);
+                        Console.WriteLine(e.Out.Name + " " + e.Out.GetType().Name);
                     });
                 }
                 else

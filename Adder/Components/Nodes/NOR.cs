@@ -30,9 +30,5 @@ namespace Adder.Components.Nodes
         {
             visitor.Visit(this);
         }
-        public override Node Clone()
-        {
-            return this.MemberwiseClone() as Node;
-        }
     }
 }

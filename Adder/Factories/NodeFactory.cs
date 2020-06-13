@@ -30,33 +30,9 @@ namespace Adder.Factories
             return instance;
         }
 
-        private NodeFactory()
-        {
-            Initialize();
-        }
-
-        private void Initialize()
-        {
-            //_prototypes["AND"] = () {  return new And()};
-            //_prototypes["NOT"] = new Not();
-            //_prototypes["NAND"] = new Nand();
-            //_prototypes["NOR"] = new Nor();
-            //_prototypes["OR"] = new Or();
-            //_prototypes["XOR"] = new Xor();
-        }
-
-        //public void RegisterNode(string name, Node node)
-        //{
-        //    _prototypes[name] = node;
-        //}
-
         public Node Create(String type)
         {
             return _prototypes[type]();
-
-            //prototype = prototype.Clone();
-
-            //return prototype;
         }
     }
 }
